@@ -13,26 +13,16 @@ namespace ServiceBusDemo
         [FunctionName("ServiceBusReader")]
         public static void Run([ServiceBusTrigger("NewSubscriptions", "SendSignupEmail", Connection = "ServiceBusRootConnectionString")] byte[] structuredMessage, ILogger log)
         {
-            SignupInformation newAccount = DeserializeJsonMessage<SignupInformation>(structuredMessage);
+            SignupInformation newAccount = SerializationHelper.DeserializeJsonMessage<SignupInformation>(structuredMessage);
+
             if (newAccount.AccountExists)
             {
-                log.LogInformation("fix the filter on your subscription to prevent this.");
+                log.LogInformation("fix the filter on your subscription to reduce this noise.");
+                return;
             }
 
             log.LogInformation($"C# ServiceBus topic trigger function processed message with email: {newAccount.EmailAddress}");
         }
-
-        private static T DeserializeJsonMessage<T>(byte[] message)
-        {
-            string jsonContent = Encoding.UTF8.GetString(message);
-            return JsonConvert.DeserializeObject<T>(jsonContent);
-        } 
-    }
-
-    public class SignupInformation
-    {
-        public bool AccountExists { get; set; }
-        public string EmailAddress { get; set; }
     }
 }
 
