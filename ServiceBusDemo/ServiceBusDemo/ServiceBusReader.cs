@@ -1,0 +1,15 @@
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
+
+namespace ServiceBusDemo
+{
+    public static class ServiceBusReader
+    {
+        [FunctionName("ServiceBusReader")]
+        public static void Run([ServiceBusTrigger("NewSubscriptions", "SendSignupEmail", Connection = "ServiceBusRoot")]string mySbMsg, ILogger log)
+        {
+            log.LogInformation($"C# ServiceBus topic trigger function processed message: {mySbMsg}");
+        }
+    }
+}
