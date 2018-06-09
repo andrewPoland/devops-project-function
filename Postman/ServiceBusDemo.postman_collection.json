@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "2886c1e9-4f16-4c2c-8036-3f263b68e8b3",
+		"name": "ServiceBusDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TextLocalTest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"input\": \"testing just plain text\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7071/admin/functions/{{functionName}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"admin",
+						"functions",
+						"{{functionName}}"
+					]
+				},
+				"description": "PLain Text Test for Service bus Reader"
+			},
+			"response": []
+		},
+		{
+			"name": "JsonLocalTest",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"input\": \"\n\t    {\n\t    \t\\\"AccountExists\\\": \\\"false\\\",\n\t    \t\\\"EmailAddress\\\": \\\"test@mailinator.com\\\"\n\t    }\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7071/admin/functions/{{functionName}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"admin",
+						"functions",
+						"{{functionName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SendMessageToServiceBus",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "SharedAccessSignature sr=https%3a%2f%2f{{hostName}}.servicebus.windows.net%2f{{topicName}}&sig={{signature}}&skn={{accessPolicyName}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.microsoft.servicebus.json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[  \r\n  {  \r\n    \"Body\": \"{ \\\"AccountExists\\\": \\\"false\\\", \\\"EmailAddress\\\": \\\"test1@mailinator.com\\\" }\"\r\n  },\r\n  {\r\n\t\"Body\": \"{ \\\"AccountExists\\\": \\\"false\\\", \\\"EmailAddress\\\": \\\"test2@mailinator.com\\\" }\"\r\n  }\r\n]"
+				},
+				"url": {
+					"raw": "https://{{hostName}}.servicebus.windows.net/{{topicName}}/messages",
+					"protocol": "https",
+					"host": [
+						"{{hostName}}",
+						"servicebus",
+						"windows",
+						"net"
+					],
+					"path": [
+						"{{topicName}}",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
