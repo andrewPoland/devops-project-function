@@ -11,9 +11,9 @@ namespace ServiceBusDemo
     public static class ServiceBusReader
     {
         [FunctionName("ServiceBusReader")]
-        public static void Run([ServiceBusTrigger("NewSubscriptions", "SendSignupEmail", Connection = "ServiceBusRootConnectionString")] byte[] structuredMessage, ILogger log)
+        public static void Run([ServiceBusTrigger("NewSubscriptions", "SendSignupEmail", Connection = "ServiceBusRootConnectionString")] byte[] message, ILogger log)
         {
-            SignupInformation newAccount = SerializationHelper.DeserializeJsonMessage<SignupInformation>(structuredMessage);
+            SignupInformation newAccount = SerializationHelper.DeserializeJsonMessage<SignupInformation>(message);
 
             if (newAccount.AccountExists)
             {
