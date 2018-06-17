@@ -8,6 +8,10 @@ using Newtonsoft.Json;
 
 namespace ServiceBusDemo
 {
+    ///<Summary>
+    /// Reads a message off the service bus and logs if the message is for an
+    /// existing account or a new account.
+    ///</Summary>
     public static class ServiceBusReader
     {
         [FunctionName("ServiceBusReader")]
@@ -25,4 +29,3 @@ namespace ServiceBusDemo
         }
     }
 }
-
