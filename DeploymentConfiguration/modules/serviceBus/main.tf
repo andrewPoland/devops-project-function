@@ -7,7 +7,7 @@ resource "azurerm_servicebus_namespace" "test" {
   name                = "${var.servicebus_name}"
   location            = "${azurerm_resource_group.test.location}"
   resource_group_name = "${azurerm_resource_group.test.name}"
-  sku                 = "basic"
+  sku                 = "standard"
 
   tags {
     source = "terraform"
