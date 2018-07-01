@@ -16,8 +16,8 @@ module "service_bus_azure_function" {
   function_name = "${var.root-function_name}"
   subscription_name = "${var.root-subscription_name}"
   storage_account_name = "${var.root-storage_account_name}"
-  topic_name = "${var.root-topic_name}"
-  servicebus_name = "${var.root-servicebus_name}"
+  topic_name = "${module.service_bus.topic_name}"
+  servicebus_name = "${module.service_bus.namespace}"
 }
 
 module "application_insights" {
