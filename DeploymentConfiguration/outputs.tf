@@ -8,8 +8,7 @@ output "application_insights_instrumentation_key" {
   value = "${module.application_insights.instrumentation_key}"
 }
 
-output "all_for_one" {
-  sensitive = true
+output "all_for_one" {  
   value = "${
     map(
       "topic_connection_string", "${module.service_bus.topic_connection_string}",
