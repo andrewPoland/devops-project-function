@@ -1,5 +1,5 @@
 output "topic_connection_string" {
-  sensitive = true
+  sensitive = false
   value = "${module.service_bus.topic_connection_string}"
 }
 
@@ -8,7 +8,7 @@ output "application_insights_instrumentation_key" {
   value = "${module.application_insights.instrumentation_key}"
 }
 
-output "all_for_one" {  
+output "all_for_one" {
   value = "${
     map(
       "topic_connection_string", "${module.service_bus.topic_connection_string}",
